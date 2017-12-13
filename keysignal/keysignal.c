@@ -3,6 +3,7 @@
 	> Author: Guiwen Zhou
 	> Mail: 
 	> Created Time: Tue 14 Nov 2017 03:16:32 AM PST
+    > 异步通知机制+原子操作互斥锁
  ************************************************************************/
 #include <linux/module.h>
 #include <linux/kernel.h>
@@ -44,6 +45,8 @@ static unsigned char key_val;
 //异步通知机制结构体
 struct fasync_struct *mykey_async_queue;
 
+//初始化原子变量,标志是否已经打开
+static atomic_t canopen = ATOMIC_INIT(1);
 //中断处理函数
 static irqreturn_t key_eint_handler(int irq, void *desc)
 {
@@ -61,6 +64,7 @@ static irqreturn_t key_eint_handler(int irq, void *desc)
     //唤醒等待队列
     wake_up_interruptible(&my_key_waitq);
     //向应用程序发送信号
+    //POLL_IN为可读，POLL_OUT为可写
     kill_fasync(&mykey_async_queue, SIGIO, POLL_IN);
 
     return IRQ_RETVAL(IRQ_HANDLED);
@@ -69,6 +73,12 @@ static irqreturn_t key_eint_handler(int irq, void *desc)
 int key_open(struct inode *inode, struct file *filp)
 {
     int ret;
+    if (!atomic_dec_and_test(&canopen))
+    {
+        atomic_inc(&canopen);
+        printk(KERN_WARNING"CANNOT OPEN\n");
+        return -EBUSY;
+    }
     //初始化IRQ，同时初始化相关引脚
     ret = request_irq(IRQ_EINT(4),key_eint_handler,IRQ_TYPE_EDGE_FALLING,"my_key4",&pins_desc[0]);
     if(ret)
@@ -134,6 +144,7 @@ int key_close(struct inode *inod, struct file *filp)
     free_irq(IRQ_EINT(23),&pins_desc[3]);
     //删除fasync结构体
     mykey_fasync(-1,filp,0);
+    atomic_inc(&canopen);
     return 0;    
 }
 

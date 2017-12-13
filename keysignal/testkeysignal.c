@@ -14,7 +14,7 @@
 #include<signal.h>
 
 
-unsigned int fd;
+int fd;
 //信号处理函数
 void key_signal_func(int signum)
 {
@@ -41,7 +41,7 @@ void key_signal_func(int signum)
         }
 }
 
-void main(void)
+int  main(void)
 {
     int Oflags;
 
@@ -49,6 +49,11 @@ void main(void)
     signal(SIGIO,key_signal_func);
     //打开设备，获取设备fd
     fd = open("/dev/key_signal",O_RDWR);
+    if(fd < 0)
+    {
+        printf("Open error!\n");
+        return -1;
+    }
 
     //设置fd接收信号的进程ID
     fcntl(fd,F_SETOWN,getpid());
