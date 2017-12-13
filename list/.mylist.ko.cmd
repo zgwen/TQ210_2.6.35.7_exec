@@ -1,1 +1,0 @@
-cmd_/work/mymodules/list/mylist.ko := arm-linux-ld -EL -r  -T /work/linux/scripts/module-common.lds --build-id -o /work/mymodules/list/mylist.ko /work/mymodules/list/mylist.o /work/mymodules/list/mylist.mod.o

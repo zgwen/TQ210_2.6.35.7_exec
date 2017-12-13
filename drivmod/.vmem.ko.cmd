@@ -1,1 +1,0 @@
-cmd_/work/mymodules/drivmod/vmem.ko := arm-linux-ld -EL -r  -T /work/linux/scripts/module-common.lds --build-id -o /work/mymodules/drivmod/vmem.ko /work/mymodules/drivmod/vmem.o /work/mymodules/drivmod/vmem.mod.o

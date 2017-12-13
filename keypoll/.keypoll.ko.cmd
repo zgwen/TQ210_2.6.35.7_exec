@@ -1,1 +1,0 @@
-cmd_/work/mymodules/keypoll/keypoll.ko := arm-linux-ld -EL -r  -T /work/linux/scripts/module-common.lds --build-id -o /work/mymodules/keypoll/keypoll.ko /work/mymodules/keypoll/keypoll.o /work/mymodules/keypoll/keypoll.mod.o
