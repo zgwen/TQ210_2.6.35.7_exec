@@ -1,0 +1,1 @@
+cmd_/work/mymodules/keyloop/keyloop.ko := arm-linux-ld -EL -r  -T /work/linux/scripts/module-common.lds --build-id -o /work/mymodules/keyloop/keyloop.ko /work/mymodules/keyloop/keyloop.o /work/mymodules/keyloop/keyloop.mod.o

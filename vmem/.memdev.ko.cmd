@@ -1,0 +1,1 @@
+cmd_/work/mymodules/vmem/memdev.ko := arm-linux-ld -EL -r  -T /work/linux/scripts/module-common.lds --build-id -o /work/mymodules/vmem/memdev.ko /work/mymodules/vmem/memdev.o /work/mymodules/vmem/memdev.mod.o

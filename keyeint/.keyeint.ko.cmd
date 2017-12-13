@@ -1,0 +1,1 @@
+cmd_/work/mymodules/keyeint/keyeint.ko := arm-linux-ld -EL -r  -T /work/linux/scripts/module-common.lds --build-id -o /work/mymodules/keyeint/keyeint.ko /work/mymodules/keyeint/keyeint.o /work/mymodules/keyeint/keyeint.mod.o
