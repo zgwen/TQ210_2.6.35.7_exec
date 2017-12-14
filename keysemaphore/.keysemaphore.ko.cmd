@@ -1,0 +1,1 @@
+cmd_/work/mymodules/keysemaphore/keysemaphore.ko := arm-linux-ld -EL -r  -T /work/linux/scripts/module-common.lds --build-id -o /work/mymodules/keysemaphore/keysemaphore.ko /work/mymodules/keysemaphore/keysemaphore.o /work/mymodules/keysemaphore/keysemaphore.mod.o

@@ -1,0 +1,1 @@
+cmd_/work/mymodules/keysignal/keysignal.ko := arm-linux-ld -EL -r  -T /work/linux/scripts/module-common.lds --build-id -o /work/mymodules/keysignal/keysignal.ko /work/mymodules/keysignal/keysignal.o /work/mymodules/keysignal/keysignal.mod.o
