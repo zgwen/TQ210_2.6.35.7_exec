@@ -8,7 +8,7 @@ test:
 testcopy:
 	cp -f testkeysemaphore /work/rootfs/work/
 clean:
-	rm *.o *.ko *.mod.c *.order *.symvers
+	make -C $(KDIR) M=$(PWD) modules clean
 copy:
 	cp -f keysemaphore.ko /work/rootfs/work/
 	cp -f testkeysemaphore /work/rootfs/work/
