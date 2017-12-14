@@ -1,0 +1,33 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_PROGRAM_AUTHOR	Darren Hiebert	/dhiebert@users.sourceforge.net/
+!_TAG_PROGRAM_NAME	Exuberant Ctags	//
+!_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
+!_TAG_PROGRAM_VERSION	5.9~svn20110310	//
+CC	Makefile	/^CC = arm-linux-gcc$/;"	m
+KDIR	Makefile	/^KDIR := \/work\/linux\/$/;"	m
+__this_module	keytimer.mod.c	/^struct module __this_module$/;"	v	typeref:struct:module
+__used	keytimer.mod.c	/^__used$/;"	v	file:
+key_class	keytimer.c	/^static struct class *key_class;$/;"	v	typeref:struct:class	file:
+key_class_dev	keytimer.c	/^static struct device *key_class_dev;$/;"	v	typeref:struct:device	file:
+key_close	keytimer.c	/^int key_close(struct inode *inod, struct file *filp)$/;"	f
+key_eint_handler	keytimer.c	/^static irqreturn_t key_eint_handler(int irq, void *desc)$/;"	f	file:
+key_fops	keytimer.c	/^static struct file_operations key_fops = $/;"	v	typeref:struct:file_operations	file:
+key_open	keytimer.c	/^int key_open(struct inode *inode, struct file *filp)$/;"	f
+key_poll	keytimer.c	/^unsigned int  key_poll(struct file *filp, struct poll_table_struct *wait)$/;"	f
+key_pressed	keytimer.c	/^static volatile int key_pressed = 0;$/;"	v	file:
+key_read	keytimer.c	/^static ssize_t key_read(struct file *filp, char __user *buf, size_t size, loff_t *ppos)$/;"	f	file:
+key_val	keytimer.c	/^    unsigned char key_val;$/;"	m	struct:pin_desc	file:
+key_val	keytimer.c	/^static unsigned char key_val;$/;"	v	file:
+main	testkeytimer.c	/^int  main(int argc, char *argv)$/;"	f
+major	keytimer.c	/^int major;\/\/主设备号$/;"	v
+mykey_async_queue	keytimer.c	/^struct fasync_struct *mykey_async_queue;$/;"	v	typeref:struct:fasync_struct
+mykey_exit	keytimer.c	/^module_exit(mykey_exit);$/;"	v
+mykey_exit	keytimer.c	/^static void mykey_exit(void)$/;"	f	file:
+mykey_fasync	keytimer.c	/^static int mykey_fasync(int fd, struct file *file, int on)$/;"	f	file:
+mykey_init	keytimer.c	/^module_init(mykey_init);$/;"	v
+mykey_init	keytimer.c	/^static int mykey_init(void)$/;"	f	file:
+obj-m	Makefile	/^obj-m :=keytimer.o$/;"	m
+pin	keytimer.c	/^    unsigned int pin;$/;"	m	struct:pin_desc	file:
+pin_desc	keytimer.c	/^struct pin_desc{$/;"	s	file:
+pins_desc	keytimer.c	/^struct pin_desc pins_desc[4] = {$/;"	v	typeref:struct:pin_desc
