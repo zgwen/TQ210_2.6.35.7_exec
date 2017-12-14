@@ -3,7 +3,6 @@
 	> Author: Guiwen Zhou
 	> Mail: 
 	> Created Time: Thu 16 Nov 2017 03:40:31 AM PST
-    > 测试信号量，打开文件时使用了默认的阻塞机制
  ************************************************************************/
 
 #include<stdio.h>
@@ -21,7 +20,7 @@ int  main(int argc, char *argv)
     unsigned char key_val;
     int ret;
     //打开设备，获取设备fd
-    if((fd = open("/dev/key_semphore",O_RDWR )) < 0 )
+    if((fd = open("/dev/key_semphore",O_RDWR | O_NONBLOCK)) < 0 )
     {
         printf("Open error!\n");
         return -1;
@@ -50,9 +49,8 @@ int  main(int argc, char *argv)
                     printf("Power pressed!\n");
                     break;
                 default:
-                    printf("wait error!\n");
+                    printf("wait error!");
             }
         }
     }
 }
-

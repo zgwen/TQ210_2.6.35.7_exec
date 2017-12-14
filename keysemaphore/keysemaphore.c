@@ -76,14 +76,21 @@ int key_open(struct inode *inode, struct file *filp)
     
     if(filp->f_flags & O_NONBLOCK)
     {
-        //非阻塞模式，如果请求信号量失败，立即返回1
-        if(down_trylock(key_lock))
+        //非阻塞模式，如果请求信号量失败，down_trylock立即返回1
+        if(down_trylock(&key_lock))
             return -EBUSY;
     }
     else
     {
     //阻塞模式,请求信号量，如果请求不到，进入TASK_INTERRUPTIBLE类型的睡眠状态,如果是由信号量返回，返回值为0
-    down_interruptible(key_lock);
+        if(down_interruptible(&key_lock))
+        {
+            printk("down_trylock returnd by interrupt\n");
+        }
+        else
+        {
+            printk("down_trylock returnd by semaphore\n");
+        }
     }
 
 
@@ -108,7 +115,7 @@ static ssize_t key_read(struct file *filp, char __user *buf, size_t size, loff_t
 {
     if(size != 1)
         return -EINVAL;
-    if(fiel->f_flags & O_NONBLOCK)
+    if(filp->f_flags & O_NONBLOCK)
     {
         //非阻塞模式，如果按键按下标志未置位，返回再来一次
         if(!key_pressed)
@@ -154,7 +161,7 @@ static int mykey_fasync(int fd, struct file *file, int on)
 int key_close(struct inode *inod, struct file *filp)
 {
     //释放信号量
-    up(key_lock);
+    up(&key_lock);
     //释放中断 
     free_irq(IRQ_EINT(4),&pins_desc[0]);
     free_irq(IRQ_EINT(5),&pins_desc[1]);
@@ -162,8 +169,6 @@ int key_close(struct inode *inod, struct file *filp)
     free_irq(IRQ_EINT(23),&pins_desc[3]);
     //删除fasync结构体
     mykey_fasync(-1,filp,0);
-    atomic_inc(&canopen);
-
     return 0;    
 }
 
